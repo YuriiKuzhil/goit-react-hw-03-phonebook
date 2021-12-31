@@ -8,25 +8,23 @@ class ThemeSwitch extends Component {
 
   componentDidMount() {
     const themeStyle = localStorage.getItem('themeStyle');
-    const parsedThemeStyle = JSON.parse(themeStyle);
 
-    parsedThemeStyle === 'dark'
+    themeStyle === 'dark'
       ? this.setState({ checked: true })
       : this.setState({ checked: false });
   }
 
   handleChange = checked => {
     this.setState({ checked });
-
-    this.props.onChange(this.state.checked);
+    this.props.themeChange(checked);
   };
 
   render() {
     return (
       <Label>
         <Switch
-          onChange={this.handleChange}
           checked={this.state.checked}
+          onChange={this.handleChange}
           height={30}
           width={65}
           offColor="#c05805"

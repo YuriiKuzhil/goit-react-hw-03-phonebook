@@ -27,13 +27,12 @@ class App extends Component {
     const parsedContacts = JSON.parse(contacts);
 
     const themeStyle = localStorage.getItem('themeStyle');
-    const parsedThemeStyle = JSON.parse(themeStyle);
 
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
     }
-    if (parsedThemeStyle) {
-      this.setState({ themeStyle: parsedThemeStyle });
+    if (themeStyle) {
+      this.setState({ themeStyle: themeStyle });
     }
   }
   componentDidUpdate(prevProps, prevState) {
@@ -45,7 +44,7 @@ class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(nextContacts));
     }
     if (nextThemeStyle !== prevThemeStyle) {
-      localStorage.setItem('themeStyle', JSON.stringify(nextThemeStyle));
+      localStorage.setItem('themeStyle', nextThemeStyle);
     }
   }
   ThemeChange = checked => {
@@ -109,14 +108,14 @@ class App extends Component {
 
   render() {
     const { filter, themeStyle } = this.state;
+
     return (
       <>
         <ThemeProvider theme={theme[themeStyle]}>
           <GlobalStyle />
           <Wrapper>
-            {/* <ThemeSwitch onChange={this.handleChange} /> */}
             <PhonebookFormWrapper>
-              <ThemeSwitch onChange={this.ThemeChange} />
+              <ThemeSwitch themeChange={this.ThemeChange} />
               <Title>
                 Phone
                 <PartsOfWord>book</PartsOfWord>
