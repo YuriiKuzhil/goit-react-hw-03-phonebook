@@ -31,7 +31,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   width: 100%;
   padding: 10px 10px 10px 50px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
+  border: 2px solid ${({ theme }) => theme.inputBorderColor};
   border-radius: 4px;
   outline: none;
   transition: border-color 250ms

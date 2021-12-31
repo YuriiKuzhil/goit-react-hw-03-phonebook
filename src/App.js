@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import initialContacts from './data/initialContacts.json';
 import PhonebookForm from './components/phonebookForm';
 import ContactsList from './components/contacts/contactsList';
 import ContactsFilter from './components/contacts/contactsFilter';
@@ -19,11 +18,37 @@ import { theme } from './constantStyles/theme';
 
 class App extends Component {
   state = {
-    contacts: initialContacts,
+    contacts: [],
     filter: '',
     themeStyle: 'light',
   };
-  handleChange = checked => {
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    const themeStyle = localStorage.getItem('themeStyle');
+    const parsedThemeStyle = JSON.parse(themeStyle);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+    if (parsedThemeStyle) {
+      this.setState({ themeStyle: parsedThemeStyle });
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const nextContacts = this.state.contacts;
+    const prevContacts = prevState.contacts;
+    const nextThemeStyle = this.state.themeStyle;
+    const prevThemeStyle = prevState.themeStyle;
+    if (nextContacts !== prevContacts) {
+      localStorage.setItem('contacts', JSON.stringify(nextContacts));
+    }
+    if (nextThemeStyle !== prevThemeStyle) {
+      localStorage.setItem('themeStyle', JSON.stringify(nextThemeStyle));
+    }
+  }
+  ThemeChange = checked => {
     checked
       ? this.setState({ themeStyle: 'dark' })
       : this.setState({ themeStyle: 'light' });
@@ -91,7 +116,7 @@ class App extends Component {
           <Wrapper>
             {/* <ThemeSwitch onChange={this.handleChange} /> */}
             <PhonebookFormWrapper>
-              <ThemeSwitch onChange={this.handleChange} />
+              <ThemeSwitch onChange={this.ThemeChange} />
               <Title>
                 Phone
                 <PartsOfWord>book</PartsOfWord>

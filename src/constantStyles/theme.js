@@ -12,6 +12,7 @@ export const theme = {
     backgroundColor: '#233030',
     buttonBackground: '#cdbea7',
     borderColor: '#882426',
+    inputBorderColor: '#cdbea7',
     generalStyles,
   },
 
@@ -20,6 +21,7 @@ export const theme = {
     backgroundColor: '#cdbea7',
     buttonBackground: '#f4ebdb',
     borderColor: 'rgba(0, 0, 0, 0.2)',
+    inputBorderColor: '#233030',
     generalStyles,
   },
 };

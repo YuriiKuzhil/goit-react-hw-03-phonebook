@@ -9,22 +9,23 @@ export const SearchIcon = styled(FaSearch)`
 export const Label = styled.label`
   position: relative;
   font-size: 18px;
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms ${({ theme }) => theme.generalStyles.timingFunction};
 
   :hover,
   :focus-within {
-    color: #df7c10;
+    color: ${({ theme }) => theme.generalStyles.accentColor};
   }
 `;
 export const Input = styled.input`
   width: 100%;
   padding: 10px 10px 10px 50px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
+  border: 2px solid ${({ theme }) => theme.inputBorderColor};
   border-radius: 4px;
   outline: none;
-  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 250ms
+    ${({ theme }) => theme.generalStyles.timingFunction};
   :hover,
   :focus {
-    border-color: #df7c10;
+    border-color: ${({ theme }) => theme.generalStyles.accentColor};
   }
 `;

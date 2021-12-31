@@ -24,7 +24,6 @@ export const ContactsContainer = styled.div`
     border-top: 3px solid ${({ theme }) => theme.borderColor};
   }
   @media screen and (min-width: 1024px) {
-    /* margin-left: 50px; */
     padding: 9px 15px 0;
     width: 400px;
   }

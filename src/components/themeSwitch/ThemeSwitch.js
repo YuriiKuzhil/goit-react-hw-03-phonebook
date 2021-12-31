@@ -6,6 +6,15 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 class ThemeSwitch extends Component {
   state = { checked: false };
 
+  componentDidMount() {
+    const themeStyle = localStorage.getItem('themeStyle');
+    const parsedThemeStyle = JSON.parse(themeStyle);
+
+    parsedThemeStyle === 'dark'
+      ? this.setState({ checked: true })
+      : this.setState({ checked: false });
+  }
+
   handleChange = checked => {
     this.setState({ checked });
 
