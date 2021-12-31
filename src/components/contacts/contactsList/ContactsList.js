@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import ContactsItem from './contactsItem';
 import { List, Message } from './ContactsList.styled';
+import { FaFrown } from 'react-icons/fa';
 const ContactsList = ({ filteredContacts, deleteContact }) => {
   return (
     <List>
       {filteredContacts.length === 0 ? (
-        <Message>😔 Sorry! No contacts</Message>
+        <Message>
+          <FaFrown /> Sorry! No contacts
+        </Message>
       ) : (
         filteredContacts.map(({ name, id, number }) => (
           <ContactsItem

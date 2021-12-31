@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+// import { FaUser, FaPhoneAlt } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { Form, Button, Label, Input } from './phonebookForm.styled';
+import {
+  Form,
+  Button,
+  Label,
+  Input,
+  UserIcon,
+  PhoneIcon,
+} from './phonebookForm.styled';
 
 class PhonebookForm extends Component {
   state = {
@@ -30,6 +38,7 @@ class PhonebookForm extends Component {
 
   render() {
     const { name, number } = this.state;
+
     return (
       <Form onSubmit={this.addContact}>
         <Label>
@@ -43,9 +52,10 @@ class PhonebookForm extends Component {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
+          <UserIcon />
         </Label>
         <Label>
-          Number
+          Phone Number
           <Input
             onChange={this.addName}
             value={number}
@@ -55,6 +65,7 @@ class PhonebookForm extends Component {
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
+          <PhoneIcon />
         </Label>
 
         <Button type="submit">Add contact</Button>

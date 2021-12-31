@@ -1,27 +1,30 @@
-import styled from '@emotion/styled';
-export const ListItem = styled.li`
-  display: flex;
-  align-items: center;
+import styled from 'styled-components';
+import { FaTrash, FaUserTie } from 'react-icons/fa';
 
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+export const TrashIcon = styled(FaTrash)``;
+export const UserIcon = styled(FaUserTie)`
+  margin-right: 15px;
+`;
+
+export const ListItem = styled.li`
+  text-align: center;
+
+  @media screen and (min-width: 400px) {
+    display: flex;
+    align-items: center;
+  }
+
+  transition: background-color 250ms
+      ${({ theme }) => theme.generalStyles.timingFunction},
+    color 250ms ${({ theme }) => theme.generalStyles.timingFunction};
 
   :not(:last-child) {
     margin-bottom: 10px;
   }
   :focus,
   :hover {
-    color: #fff;
-    background-color: #df7c10;
-  }
-  ::before {
-    content: '';
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    margin-right: 15px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.2);
+    color: ${({ theme }) => theme.generalStyles.white};
+    background-color: ${({ theme }) => theme.generalStyles.accentColor};
   }
 `;
 export const ItemText = styled.p`
@@ -30,22 +33,31 @@ export const ItemText = styled.p`
   margin-right: 15px;
 `;
 export const ItemButton = styled.button`
-  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+
+  @media screen and (min-width: 425px) {
+    margin: 0 0 0 auto;
+  }
+
   padding: 5px 10px;
   border: 1px solid transparent;
   border-radius: 4px;
   min-width: 80px;
   font-family: inherit;
   font-size: 14px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${({ theme }) => theme.buttonBackground};
   box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
   cursor: pointer;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms
+      ${({ theme }) => theme.generalStyles.timingFunction},
+    color 250ms ${({ theme }) => theme.generalStyles.timingFunction};
 
   :hover,
-  :focus {
-    color: #fff;
-    background-color: #df7c10;
+  :focus-visible {
+    color: ${({ theme }) => theme.generalStyles.white};
+    background-color: ${({ theme }) => theme.generalStyles.accentColor};
   }
 `;

@@ -4,12 +4,29 @@ import initialContacts from './data/initialContacts.json';
 import PhonebookForm from './components/phonebookForm';
 import ContactsList from './components/contacts/contactsList';
 import ContactsFilter from './components/contacts/contactsFilter';
-import { Wrapper, Title, ContactsContainer, ContactsTitle } from './App.styled';
+import ThemeSwitch from './components/themeSwitch';
+import {
+  Wrapper,
+  Title,
+  ContactsContainer,
+  ContactsTitle,
+  PartsOfWord,
+  PhonebookFormWrapper,
+} from './App.styled';
+import { GlobalStyle } from './GlobalStyles';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './constantStyles/theme';
 
 class App extends Component {
   state = {
     contacts: initialContacts,
     filter: '',
+    themeStyle: 'light',
+  };
+  handleChange = checked => {
+    checked
+      ? this.setState({ themeStyle: 'dark' })
+      : this.setState({ themeStyle: 'light' });
   };
 
   compareNames = name => {
@@ -34,7 +51,6 @@ class App extends Component {
       contacts: [contact, ...contacts],
     }));
 
-    this.setState({ name: '', number: '' });
     toast.success(`Contact ${contact.name} added!`, {
       style: {
         border: '1px solid #49FF71',
@@ -67,22 +83,33 @@ class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
-
+    const { filter, themeStyle } = this.state;
     return (
-      <Wrapper>
-        <Title>Phonebook</Title>
-        <PhonebookForm onSubmit={this.addContact} />
-        <ContactsContainer>
-          <ContactsTitle>Contacts</ContactsTitle>
-          <ContactsFilter value={filter} onChange={this.changeFilter} />
-          <ContactsList
-            filteredContacts={this.findContacs()}
-            deleteContact={this.deleteContact}
-          />
-        </ContactsContainer>
-        <Toaster position="bottom-center" reverseOrder={false} />
-      </Wrapper>
+      <>
+        <ThemeProvider theme={theme[themeStyle]}>
+          <GlobalStyle />
+          <Wrapper>
+            {/* <ThemeSwitch onChange={this.handleChange} /> */}
+            <PhonebookFormWrapper>
+              <ThemeSwitch onChange={this.handleChange} />
+              <Title>
+                Phone
+                <PartsOfWord>book</PartsOfWord>
+              </Title>
+              <PhonebookForm onSubmit={this.addContact} />
+            </PhonebookFormWrapper>
+            <ContactsContainer>
+              <ContactsTitle>Contacts</ContactsTitle>
+              <ContactsFilter value={filter} onChange={this.changeFilter} />
+              <ContactsList
+                filteredContacts={this.findContacs()}
+                deleteContact={this.deleteContact}
+              />
+            </ContactsContainer>
+            <Toaster position="bottom-center" reverseOrder={false} />
+          </Wrapper>
+        </ThemeProvider>
+      </>
     );
   }
 }
